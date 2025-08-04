@@ -127,7 +127,148 @@
     .page.active { display: block; }
 
     .glow-text {
+      background: linear-gradient(to right, #ffaad7, #ffffff, #ffaad7);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    button {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 25px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      z-index: 10;
+    }
+
+    button:hover {
+      background-color: #e057a1;
+    }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- 🔳 OVERLAY WITH VIDEO + BUTTON -->
+  <div id="introOverlay">
+    <video id="introVideo" src="https://files.catbox.moe/j3u7h8.mp4" playsinline></video>
+    <button id="startButton">Clique aqui</button>
+  </div>
+
+  <!-- 🔥 FIREWORKS BACKGROUND -->
+  <div id="intro"></div>
+
+  <!-- 💖 HEARTS -->
+  <script>
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      heart.innerHTML = "❤️";
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- 🎵 MUSIC -->
+  <audio autoplay loop>
+     <source src="https://raw.githubusercontent.com/anik77777/a/main/Sabrina%20Carpenter%20-%20Espresso%20(Official%20Roblox%20Music%20Video).mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 🌹 MAIN CONTENT -->
+  <div id="main">
+    <div class="page active">
+      <span class="glow-text">Oi Eve, hoje é o seu dia especial...</span><br>
+      <img src="https://i.postimg.cc/rFLG1gw2/1200px-Rapunzel-KHIII.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div class="page">
+      <span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br>
+      <img src="https://i.postimg.cc/MKRpJ2Rg/queen-elsa-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div class="page">
+      <span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br>
+      <img src="https://i.postimg.cc/0QHTXff9/800px-Moana-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div class="page">
+      <span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span><br>
+      <img src="https://i.postimg.cc/nhxJt8VS/ariel-human-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div class="page">
+      <span class="glow-text">Você merece todo o amor do mundo ❤️</span><br>
+      <img src="https://i.postimg.cc/1zzb9skB/640-Aurora-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div class="page">
+      <span class="glow-text">Feliz aniversário, princesa 🌸</span>
+      <img src="https://i.postimg.cc/0yFZ44gW/evolution-of-meridas-art-style-in-disney-princess-franchise-v0-4g01x6ejr8hd1-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+    <div class="page">
+      <span class="glow-text">Com carinho, de alguém que se importa muito com você – ANIK</span>
+      <img src="https://i.postimg.cc/gjnLHXL5/Chat-GPT-Image-4-2025-00-00-06-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+    </div>
+
+    <button onclick="nextPage()">Próximo</button>
+  </div>
+
+  <script>
+    const video = document.getElementById("introVideo");
+    const overlay = document.getElementById("introOverlay");
+    const startBtn = document.getElementById("startButton");
+
+    startBtn.addEventListener("click", () => {
+      video.play();
+      startBtn.style.display = "none";
+      video.setAttribute("controls", "true");
+
+      video.addEventListener("ended", () => {
+        overlay.style.display = "none";
+        document.getElementById("intro").style.display = "flex";
+        showFireworks();
+        setTimeout(() => {
+          document.getElementById("intro").style.display = "none";
+          document.getElementById("main").style.display = "block";
+        }, 4000);
+      });
+    });
+
+    function showFireworks() {
+      for (let i = 0; i < 20; i++) {
+        const f = document.createElement("div");
+        f.className = "firework";
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.top = Math.random() * 100 + "vh";
+        f.style.background = `hsl(${Math.random()*360}, 100%, 60%)`;
+        document.getElementById("intro").appendChild(f);
+      }
+    }
+
+    const pages = document.querySelectorAll(".page");
+    let current = 0;
+    function nextPage() {
+      pages[current].classList.remove("active");
+      current++;
+      if (pages[current]) {
+        pages[current].classList.add("active");
+      } else {
+        document.querySelector("button").style.display = "none";
+      }
+    }
+  </script>
+
+</body>
 </html>
+
 
 
 
