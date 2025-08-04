@@ -22,7 +22,24 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       z-index: 1000;
+    }
+
+    #countdown {
+      font-size: 5rem;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    iframe#introVideo {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
     }
 
     .firework {
@@ -126,11 +143,12 @@
   </style>
 </head>
 <body>
+  <div id="intro">
+    <div id="countdown">3</div>
+  </div>
 
-  <!-- 🔥 INTRO WITH FIREWORKS -->
-  <div id="intro"></div>
+  <iframe id="introVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&controls=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-  <!-- 💖 HEARTS -->
   <script>
     for (let i = 0; i < 30; i++) {
       const heart = document.createElement("div");
@@ -140,67 +158,58 @@
       heart.innerHTML = "❤️";
       document.body.appendChild(heart);
     }
+
+    let count = 3;
+    const countdownEl = document.getElementById("countdown");
+    const intro = document.getElementById("intro");
+    const videoFrame = document.getElementById("introVideo");
+
+    const interval = setInterval(() => {
+      count--;
+      if (count > 0) {
+        countdownEl.innerText = count;
+      } else {
+        clearInterval(interval);
+        countdownEl.style.display = "none";
+        videoFrame.style.display = "block";
+      }
+    }, 1000);
+
+    function onYouTubeIframeAPIReady() {
+      new YT.Player('introVideo', {
+        events: {
+          'onStateChange': function (e) {
+            if (e.data === YT.PlayerState.ENDED) {
+              document.getElementById("intro").style.display = "none";
+              videoFrame.style.display = "none";
+              document.getElementById("main").style.display = "block";
+            }
+          }
+        }
+      });
+    }
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
   </script>
 
-  <!-- 🎵 MUSIC -->
   <audio autoplay loop>
-     <source src="https://raw.githubusercontent.com/anik77777/a/main/Sabrina%20Carpenter%20-%20Espresso%20(Official%20Roblox%20Music%20Video).mp3" type="audio/mpeg">
+    <source src="https://github.com/anik77777/a/raw/main/Sabrina%20Carpenter%20-%20Espresso%20(Official%20Roblox%20Music%20Video).mp3" type="audio/mpeg">
   </audio>
 
-  <!-- 🌹 MAIN CONTENT -->
   <div id="main">
-    <div class="page active">
-      <span class="glow-text">Oi Eve, hoje é o seu dia especial...</span><br>
-      <img src="https://i.postimg.cc/rFLG1gw2/1200px-Rapunzel-KHIII.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br>
-      <img src="https://i.postimg.cc/MKRpJ2Rg/queen-elsa-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br>
-      <img src="https://i.postimg.cc/0QHTXff9/800px-Moana-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span><br>
-      <img src="https://i.postimg.cc/nhxJt8VS/ariel-human-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Você merece todo o amor do mundo ❤️</span><br>
-      <img src="https://i.postimg.cc/1zzb9skB/640-Aurora-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Feliz aniversário, princesa 🌸</span>
-      <img src="https://i.postimg.cc/0yFZ44gW/evolution-of-meridas-art-style-in-disney-princess-franchise-v0-4g01x6ejr8hd1-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Com carinho, de alguém que se importa muito com você – ANIK</span>
-      <img src="https://i.postimg.cc/gjnLHXL5/Chat-GPT-Image-4-2025-00-00-06-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-
+    <div class="page active"><span class="glow-text">Oi Eve, hoje é o seu dia especial...</span></div>
+    <div class="page"><span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span></div>
+    <div class="page"><span class="glow-text">Cada momento com você é mágico e inesquecível...</span></div>
+    <div class="page"><span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span></div>
+    <div class="page"><span class="glow-text">Você merece todo o amor do mundo ❤️</span></div>
+    <div class="page"><span class="glow-text">Feliz aniversário, princesa 🌸</span></div>
+    <div class="page"><span class="glow-text">Com carinho, de alguém que se importa muito com você – ANIK</span></div>
     <button onclick="nextPage()">Próximo</button>
   </div>
 
-  <!-- ✅ JAVASCRIPT SECTION -->
   <script>
-    function showFireworks() {
-      for (let i = 0; i < 20; i++) {
-        const f = document.createElement("div");
-        f.className = "firework";
-        f.style.left = Math.random() * 100 + "vw";
-        f.style.top = Math.random() * 100 + "vh";
-        f.style.background = `hsl(${Math.random()*360}, 100%, 60%)`;
-        document.getElementById("intro").appendChild(f);
-      }
-    }
-
-    setTimeout(() => {
-      document.getElementById("intro").style.display = "none";
-      document.getElementById("main").style.display = "block";
-    }, 5000);
-
-    showFireworks();
-
     const pages = document.querySelectorAll(".page");
     let current = 0;
     function nextPage() {
@@ -213,6 +222,5 @@
       }
     }
   </script>
-
 </body>
-</html> shu web saytimni kodiga o'gartirish kiritmasdan shunchaki introga 3 2 1 deb orqaga sanab boshlansin va keyin video linkka joy ajrat sanagandan shu video korinsin video tugagandan keyin o'sha asosiy kontentga o'tsin vaqat hech narsani buzma teginma faqat introga mushakbozlik o'rnini o'zgartir
+</html>
