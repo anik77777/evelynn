@@ -32,7 +32,7 @@
       margin-bottom: 20px;
     }
 
-    iframe#introVideo {
+    video#introVideo {
       display: none;
       position: fixed;
       top: 0;
@@ -147,7 +147,9 @@
     <div id="countdown">3</div>
   </div>
 
-  <iframe id="introVideo" src="https://github.com/anik77777/evelynn/blob/main/AQPLAUy4Q9HnZrvnoq74RLsw_AA2sLuFT681ExJ1ss3u4bWIaJ2f_IYvOp10F3p.mp4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <video id="introVideo" autoplay muted playsinline>
+    <source src="https://raw.githubusercontent.com/anik77777/evelynn/main/AQPLAUy4Q9HnZrvnoq74RLsw_AA2sLuFT681ExJ1ss3u4bWIaJ2f_IYvOp10F3p.mp4" type="video/mp4">
+  </video>
 
   <script>
     for (let i = 0; i < 30; i++) {
@@ -175,23 +177,11 @@
       }
     }, 1000);
 
-    function onYouTubeIframeAPIReady() {
-      new YT.Player('introVideo', {
-        events: {
-          'onStateChange': function (e) {
-            if (e.data === YT.PlayerState.ENDED) {
-              document.getElementById("intro").style.display = "none";
-              videoFrame.style.display = "none";
-              document.getElementById("main").style.display = "block";
-            }
-          }
-        }
-      });
-    }
-
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
+    videoFrame.addEventListener("ended", () => {
+      intro.style.display = "none";
+      videoFrame.style.display = "none";
+      document.getElementById("main").style.display = "block";
+    });
   </script>
 
   <audio autoplay loop>
@@ -224,3 +214,4 @@
   </script>
 </body>
 </html>
+
