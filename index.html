@@ -156,7 +156,7 @@
 <body>
 
   <div id="intro">
-    <h1>Especialmente para Eve</h1>
+    <h1 id="introTitle">Especialmente para Eve</h1>
     <button id="startBtn">✨ Clique aqui para começar ✨</button>
     <video id="introVideo" playsinline>
       <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
@@ -170,7 +170,6 @@
   <audio id="bgMusic" src="https://files.catbox.moe/1a0rmy.mp3" loop></audio>
 
   <div id="main">
-    <!-- all your .page divs (unchanged) -->
     <div class="page active"><span class="glow-text">Oi Eve, hoje é o seu dia especial...</span><br><img src="https://i.postimg.cc/rFLG1gw2/1200px-Rapunzel-KHIII.png" style="max-width: 100%; margin-top: 20px;"></div>
     <div class="page"><span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br><img src="https://i.postimg.cc/c4NXWgk0/Elsa-Frozen-Disney-Princess-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
     <div class="page"><span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br><img src="https://i.postimg.cc/g090tpkS/Vanellope-von-Schweetz-4-29-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
@@ -196,6 +195,7 @@
     }
 
     const startBtn = document.getElementById("startBtn");
+    const introTitle = document.getElementById("introTitle");
     const introVideo = document.getElementById("introVideo");
     const finalVideo = document.getElementById("finalVideo");
     const introDiv = document.getElementById("intro");
@@ -205,6 +205,7 @@
 
     startBtn.addEventListener("click", () => {
       startBtn.style.display = "none";
+      introTitle.style.display = "none";
       introDiv.style.background = "white";
       introVideo.style.display = "block";
       introVideo.muted = false;
@@ -231,6 +232,7 @@
         document.querySelector("#main button").style.display = "none";
         bgMusic.pause();
         mainContent.style.display = "none";
+        document.body.style.background = "black";
         finalVideo.style.display = "block";
         finalVideo.play();
       }
