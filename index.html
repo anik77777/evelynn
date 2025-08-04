@@ -136,8 +136,8 @@
   <!-- 🎬 VIDEO SCREEN -->
   <div id="videoOverlay">
     <video id="introVideo" playsinline>
-  <source src="https://files.catbox.moe/dqlwce.mp4" type="video/mp4" />
-</video>
+      <source src="https://files.catbox.moe/dqlwce.mp4" type="video/mp4" />
+    </video>
   </div>
 
   <!-- 🟣 START BUTTON -->
@@ -197,6 +197,7 @@
     startBtn.onclick = () => {
       startScreen.style.display = 'none';
       videoOverlay.style.display = 'block';
+      introVideo.muted = false;
       introVideo.play();
     };
 
@@ -222,7 +223,5 @@
   </script>
 </body>
 </html>
-
-
 
 
