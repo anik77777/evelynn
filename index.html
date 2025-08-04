@@ -46,7 +46,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: black;
+      background: white; /* O'ZGARTIRILDI: oldingi 'black' */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,7 +74,7 @@
       100% { transform: scale(1); }
     }
 
-    video#introVideo {
+    video#introVideo, video#finalVideo {
       position: fixed;
       top: 0;
       left: 0;
@@ -135,9 +135,13 @@
   <div id="intro">
     <button id="startBtn">✨ Clique aqui para começar ✨</button>
     <video id="introVideo" playsinline>
-      <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
+      <source src="https://files.catbox.moe/t5iju6.mp4" type="video/mp4">
     </video>
   </div>
+
+  <video id="finalVideo" playsinline>
+    <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
+  </video>
 
   <audio id="bgMusic" src="https://files.catbox.moe/1a0rmy.mp3" loop></audio>
 
@@ -148,11 +152,11 @@
     </div>
     <div class="page">
       <span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br>
-      <img src="https://i.postimg.cc/c4NXWgk0/Elsa-Frozen-Disney-Princess-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+      <img src="https://i.postimg.cc/02HZhWSK/png-transparent-disney-frozen-anna-and-elsa-elsa-kristoff-anna-olaf-anna-disney-princess-cartoon-dol.png" style="max-width: 100%; margin-top: 20px;">
     </div>
     <div class="page">
       <span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br>
-      <img src="https://i.postimg.cc/g090tpkS/Vanellope-von-Schweetz-4-29-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+      <img src="https://i.postimg.cc/0QHTXff9/800px-Moana-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
     </div>
     <div class="page">
       <span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span><br>
@@ -186,6 +190,7 @@
 
     const startBtn = document.getElementById("startBtn");
     const introVideo = document.getElementById("introVideo");
+    const finalVideo = document.getElementById("finalVideo");
     const introDiv = document.getElementById("intro");
     const mainContent = document.getElementById("main");
     const bgMusic = document.getElementById("bgMusic");
@@ -216,8 +221,12 @@
         pages[current].classList.add("active");
       } else {
         document.querySelector("#main button").style.display = "none";
+        bgMusic.pause();
+        finalVideo.style.display = "block";
+        finalVideo.play();
       }
     }
   </script>
 </body>
 </html>
+
