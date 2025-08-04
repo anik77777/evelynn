@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Feliz Aniversário, Eve!</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Quicksand', sans-serif;
       background: radial-gradient(circle, #ff004f, #2e003e);
       color: white;
       overflow: hidden;
@@ -42,13 +48,15 @@
       align-items: center;
       justify-content: center;
       z-index: 10000;
+      transition: background 1s ease;
     }
 
     #intro h1 {
-      color: white;
-      font-size: 2rem;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px hotpink, 0 0 20px white;
+      color: #ff80bf;
+      font-size: 2.5rem;
+      font-family: 'Pacifico', cursive;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff80bf;
     }
 
     #startBtn {
@@ -71,7 +79,7 @@
       100% { transform: scale(1); }
     }
 
-    video {
+    video#introVideo, video#finalVideo {
       position: fixed;
       top: 0;
       left: 0;
@@ -107,6 +115,7 @@
       font-size: 1.8rem;
       display: block;
       margin-bottom: 10px;
+      font-family: 'Pacifico', cursive;
     }
 
     button#nextPageBtn, #main button {
@@ -131,26 +140,23 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
       height: 100vh;
+      width: 100vw;
       background: black;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      color: #ff80bf;
       font-size: 3rem;
-      padding: 20px;
-      z-index: 10001;
-      flex-direction: column;
-      text-shadow: 0 0 15px hotpink, 0 0 30px white;
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+      z-index: 9999;
+      padding-top: 30vh;
+      text-shadow: 0 0 20px #fff, 0 0 40px #ff80bf;
     }
   </style>
 </head>
 <body>
 
   <div id="intro">
-    <h1>🌟 Especial para você, Eve 🌟</h1>
+    <h1>Especialmente para Eve</h1>
     <button id="startBtn">✨ Clique aqui para começar ✨</button>
     <video id="introVideo" playsinline>
       <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
@@ -161,34 +167,26 @@
     <source src="https://files.catbox.moe/t5iju6.mp4" type="video/mp4">
   </video>
 
-  <video id="bonusVideo" muted playsinline>
-    <source src="https://files.catbox.moe/7" type="video/mp4">
-  </video>
-
   <audio id="bgMusic" src="https://files.catbox.moe/1a0rmy.mp3" loop></audio>
-  <audio id="bonusAudio" src="https://files.catbox.moe/wvzzcb.mp3"></audio>
 
   <div id="main">
-    <div class="page active">
-      <span class="glow-text">Oi Eve, hoje é o seu dia especial...</span><br>
-      <img src="https://i.postimg.cc/rFLG1gw2/1200px-Rapunzel-KHIII.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <!-- Qo‘shimcha sahifalar shu yerda qoladi (siz berganlar) -->
-    <div class="page">
-      <span class="glow-text">Feliz aniversário, princesa 🌸</span>
-      <img src="https://i.postimg.cc/0yFZ44gW/evolution-of-meridas-art-style-in-disney-princess-franchise-v0-4g01x6ejr8hd1-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Com carinho, de alguém que se importa muito com você – ANIK</span>
-      <img src="https://i.postimg.cc/gjnLHXL5/Chat-GPT-Image-4-2025-00-00-06-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
+    <!-- all your .page divs (unchanged) -->
+    <div class="page active"><span class="glow-text">Oi Eve, hoje é o seu dia especial...</span><br><img src="https://i.postimg.cc/rFLG1gw2/1200px-Rapunzel-KHIII.png" style="max-width: 100%; margin-top: 20px;"></div>
+    <div class="page"><span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br><img src="https://i.postimg.cc/c4NXWgk0/Elsa-Frozen-Disney-Princess-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
+    <div class="page"><span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br><img src="https://i.postimg.cc/g090tpkS/Vanellope-von-Schweetz-4-29-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
+    <div class="page"><span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span><br><img src="https://i.postimg.cc/nhxJt8VS/ariel-human-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
+    <div class="page"><span class="glow-text">Você merece todo o amor do mundo ❤️</span><br><img src="https://i.postimg.cc/1zzb9skB/640-Aurora-removebg-preview.png" style="max-width: 70%; margin-top: 20px;"></div>
+    <div class="page"><span class="glow-text">Feliz aniversário, princesa 🌸</span><img src="https://i.postimg.cc/0yFZ44gW/evolution-of-meridas-art-style-in-disney-princess-franchise-v0-4g01x6ejr8hd1-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
+    <div class="page"><span class="glow-text">Com carinho, de alguém que se importa muito com você – ANIK</span><img src="https://i.postimg.cc/gjnLHXL5/Chat-GPT-Image-4-2025-00-00-06-removebg-preview.png" style="max-width: 100%; margin-top: 20px;"></div>
+
     <button onclick="nextPage()">Próximo</button>
   </div>
 
-  <div id="finalMessage">🎂 Feliz aniversário, Eve! <br>Fim 🎉</div>
+  <div id="finalMessage">
+    Feliz Aniversário, Eve!<br><br>Fim 🎉
+  </div>
 
   <script>
-    // Hearts
     for (let i = 0; i < 30; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
@@ -200,17 +198,16 @@
     const startBtn = document.getElementById("startBtn");
     const introVideo = document.getElementById("introVideo");
     const finalVideo = document.getElementById("finalVideo");
-    const bonusVideo = document.getElementById("bonusVideo");
-    const bonusAudio = document.getElementById("bonusAudio");
     const introDiv = document.getElementById("intro");
     const mainContent = document.getElementById("main");
     const bgMusic = document.getElementById("bgMusic");
-    const finalMessage = document.getElementById("finalMessage");
+    const finalMsg = document.getElementById("finalMessage");
 
     startBtn.addEventListener("click", () => {
       startBtn.style.display = "none";
-      introVideo.style.display = "block";
       introDiv.style.background = "white";
+      introVideo.style.display = "block";
+      introVideo.muted = false;
       introVideo.play();
     });
 
@@ -225,7 +222,6 @@
 
     const pages = document.querySelectorAll(".page");
     let current = 0;
-
     function nextPage() {
       pages[current].classList.remove("active");
       current++;
@@ -234,6 +230,7 @@
       } else {
         document.querySelector("#main button").style.display = "none";
         bgMusic.pause();
+        mainContent.style.display = "none";
         finalVideo.style.display = "block";
         finalVideo.play();
       }
@@ -241,17 +238,9 @@
 
     finalVideo.addEventListener("ended", () => {
       finalVideo.style.display = "none";
-      document.body.style.background = "black";
-      bonusVideo.style.display = "block";
-      bonusVideo.play();
-      bonusAudio.play();
-    });
-
-    bonusVideo.addEventListener("ended", () => {
-      bonusAudio.pause();
-      bonusVideo.style.display = "none";
-      finalMessage.style.display = "flex";
+      finalMsg.style.display = "flex";
     });
   </script>
 </body>
 </html>
+
