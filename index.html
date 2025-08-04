@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Feliz Aniversário, Eve!</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -42,10 +38,17 @@
       height: 100vh;
       background: black;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       z-index: 10000;
-      flex-direction: column;
+    }
+
+    #intro h1 {
+      color: white;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px hotpink, 0 0 20px white;
     }
 
     #startBtn {
@@ -68,7 +71,7 @@
       100% { transform: scale(1); }
     }
 
-    video#introVideo, video#finalVideo, video#fireworksVideo {
+    video {
       position: fixed;
       top: 0;
       left: 0;
@@ -123,7 +126,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    #fireworks {
+    #finalMessage {
       display: none;
       position: fixed;
       top: 0;
@@ -131,22 +134,23 @@
       width: 100vw;
       height: 100vh;
       background: black;
-      z-index: 10001;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    #fireworks img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      text-align: center;
+      font-size: 3rem;
+      padding: 20px;
+      z-index: 10001;
+      flex-direction: column;
+      text-shadow: 0 0 15px hotpink, 0 0 30px white;
     }
   </style>
 </head>
 <body>
 
   <div id="intro">
+    <h1>🌟 Especial para você, Eve 🌟</h1>
     <button id="startBtn">✨ Clique aqui para começar ✨</button>
     <video id="introVideo" playsinline>
       <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
@@ -157,33 +161,19 @@
     <source src="https://files.catbox.moe/t5iju6.mp4" type="video/mp4">
   </video>
 
-  <div id="fireworks">
-    <img src="https://cdn.pixabay.com/animation/2023/01/04/16/05/16-05-14-615_512.gif" alt="Fireworks">
-  </div>
+  <video id="bonusVideo" muted playsinline>
+    <source src="https://files.catbox.moe/7" type="video/mp4">
+  </video>
+
   <audio id="bgMusic" src="https://files.catbox.moe/1a0rmy.mp3" loop></audio>
-  <audio id="fireworksMusic" src="https://files.catbox.moe/wvzzcb.mp3" loop></audio>
+  <audio id="bonusAudio" src="https://files.catbox.moe/wvzzcb.mp3"></audio>
 
   <div id="main">
     <div class="page active">
       <span class="glow-text">Oi Eve, hoje é o seu dia especial...</span><br>
       <img src="https://i.postimg.cc/rFLG1gw2/1200px-Rapunzel-KHIII.png" style="max-width: 100%; margin-top: 20px;">
     </div>
-    <div class="page">
-      <span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br>
-      <img src="https://i.postimg.cc/c4NXWgk0/Elsa-Frozen-Disney-Princess-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br>
-      <img src="https://i.postimg.cc/g090tpkS/Vanellope-von-Schweetz-4-29-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span><br>
-      <img src="https://i.postimg.cc/nhxJt8VS/ariel-human-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
-    </div>
-    <div class="page">
-      <span class="glow-text">Você merece todo o amor do mundo ❤️</span><br>
-      <img src="https://i.postimg.cc/1zzb9skB/640-Aurora-removebg-preview.png" style="max-width: 70%; margin-top: 20px;">
-    </div>
+    <!-- Qo‘shimcha sahifalar shu yerda qoladi (siz berganlar) -->
     <div class="page">
       <span class="glow-text">Feliz aniversário, princesa 🌸</span>
       <img src="https://i.postimg.cc/0yFZ44gW/evolution-of-meridas-art-style-in-disney-princess-franchise-v0-4g01x6ejr8hd1-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
@@ -192,9 +182,10 @@
       <span class="glow-text">Com carinho, de alguém que se importa muito com você – ANIK</span>
       <img src="https://i.postimg.cc/gjnLHXL5/Chat-GPT-Image-4-2025-00-00-06-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
     </div>
-
     <button onclick="nextPage()">Próximo</button>
   </div>
+
+  <div id="finalMessage">🎂 Feliz aniversário, Eve! <br>Fim 🎉</div>
 
   <script>
     // Hearts
@@ -209,17 +200,17 @@
     const startBtn = document.getElementById("startBtn");
     const introVideo = document.getElementById("introVideo");
     const finalVideo = document.getElementById("finalVideo");
+    const bonusVideo = document.getElementById("bonusVideo");
+    const bonusAudio = document.getElementById("bonusAudio");
     const introDiv = document.getElementById("intro");
     const mainContent = document.getElementById("main");
     const bgMusic = document.getElementById("bgMusic");
-    const fireworks = document.getElementById("fireworks");
-    const fireworksMusic = document.getElementById("fireworksMusic");
+    const finalMessage = document.getElementById("finalMessage");
 
     startBtn.addEventListener("click", () => {
       startBtn.style.display = "none";
-      introDiv.style.background = "white";
       introVideo.style.display = "block";
-      introVideo.muted = false;
+      introDiv.style.background = "white";
       introVideo.play();
     });
 
@@ -244,15 +235,23 @@
         document.querySelector("#main button").style.display = "none";
         bgMusic.pause();
         finalVideo.style.display = "block";
-        document.body.style.background = "black";
         finalVideo.play();
-        finalVideo.addEventListener("ended", () => {
-          finalVideo.style.display = "none";
-          fireworks.style.display = "flex";
-          fireworksMusic.play();
-        });
       }
     }
+
+    finalVideo.addEventListener("ended", () => {
+      finalVideo.style.display = "none";
+      document.body.style.background = "black";
+      bonusVideo.style.display = "block";
+      bonusVideo.play();
+      bonusAudio.play();
+    });
+
+    bonusVideo.addEventListener("ended", () => {
+      bonusAudio.pause();
+      bonusVideo.style.display = "none";
+      finalMessage.style.display = "flex";
+    });
   </script>
 </body>
 </html>
