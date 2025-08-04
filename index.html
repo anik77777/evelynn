@@ -5,78 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feliz Aniversário, Eve!</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: black;
-      overflow: hidden;
       color: white;
-      text-align: center;
+      overflow: hidden;
     }
-    #countdown {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 5rem;
-      z-index: 1000;
-      animation: fadeInOut 1s ease-in-out infinite;
-    }
-    @keyframes fadeInOut {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-    #flowerBurst {
-      position: fixed;
-      top: 0;
-      left: 0;
+
+    #startScreen {
       width: 100vw;
       height: 100vh;
-      background: black;
-      z-index: 900;
-      display: none;
+      background: linear-gradient(to bottom right, #ffb6c1, #ff69b4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
     }
-    .flower {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background-image: url('https://i.postimg.cc/yNC0KR8f/flower.png');
-      background-size: cover;
-      animation: bloom 2s ease-out forwards;
+
+    #startScreen h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: white;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
     }
-    @keyframes bloom {
-      from { transform: scale(0); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+
+    #startScreen button {
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 30px;
+      background-color: white;
+      color: #ff1493;
+      box-shadow: 0 0 15px rgba(255, 20, 147, 0.7);
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
     }
+
+    #startScreen button:hover {
+      transform: scale(1.05);
+      background-color: #ffe6f0;
+    }
+
     video {
+      display: none;
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      z-index: 800;
-      display: none;
+      z-index: 10;
     }
+
     #main {
       display: none;
       background: linear-gradient(to bottom, #ff8fa3, #ffc0cb);
       min-height: 100vh;
       padding: 50px 20px;
+      text-align: center;
     }
+
     .page {
       display: none;
       font-size: 2rem;
       margin-bottom: 30px;
     }
+
     .page.active {
       display: block;
     }
-    button {
+
+    button.nextBtn {
       padding: 10px 25px;
       font-size: 1.2rem;
       background: hotpink;
@@ -90,49 +91,42 @@
 </head>
 <body>
 
-  <div id="countdown">3</div>
-  <div id="flowerBurst"></div>
+  <div id="startScreen">
+    <h1>🎉 Está pronta para uma surpresa?</h1>
+    <button onclick="startExperience()">Toque para a surpresa</button>
+  </div>
+
   <video id="introVideo" playsinline>
     <source src="https://files.catbox.moe/j3u7h8.mp4" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
 
   <div id="main">
     <div class="page active">Oi Eve, hoje é o seu dia especial...</div>
     <div class="page">Quero te dizer que você é uma pessoa incrível...</div>
     <div class="page">Feliz aniversário, princesa 🌸</div>
-    <button onclick="nextPage()">Próximo</button>
+    <button class="nextBtn" onclick="nextPage()">Próximo</button>
   </div>
 
   <script>
-    let count = 3;
-    const countdownEl = document.getElementById("countdown");
-    const flowerBurst = document.getElementById("flowerBurst");
+    const startScreen = document.getElementById("startScreen");
     const video = document.getElementById("introVideo");
+    const main = document.getElementById("main");
 
-    const interval = setInterval(() => {
-      count--;
-      if (count > 0) {
-        countdownEl.textContent = count;
-      } else {
-        clearInterval(interval);
-        countdownEl.style.display = "none";
-        flowerBurst.style.display = "block";
-        createFlowers();
-        setTimeout(() => {
-          flowerBurst.style.display = "none";
-          video.style.display = "block";
-          video.muted = false; // Enable sound
-          video.autoplay = true;
-          video.play();
-        }, 2000);
-      }
-    }, 1000);
+    function startExperience() {
+      startScreen.style.display = "none";
+      video.style.display = "block";
+      video.muted = false;
 
-    video.addEventListener("ended", () => {
-      video.style.display = "none";
-      document.getElementById("main").style.display = "block";
-    });
+      video.play().catch(err => {
+        alert("Não foi possível iniciar o vídeo automaticamente. Toque novamente.");
+        console.log(err);
+      });
+
+      video.addEventListener("ended", () => {
+        video.style.display = "none";
+        main.style.display = "block";
+      });
+    }
 
     const pages = document.querySelectorAll(".page");
     let current = 0;
@@ -142,25 +136,12 @@
       if (pages[current]) {
         pages[current].classList.add("active");
       } else {
-        document.querySelector("button").style.display = "none";
-      }
-    }
-
-    function createFlowers() {
-      for (let i = 0; i < 30; i++) {
-        const flower = document.createElement("div");
-        flower.className = "flower";
-        flower.style.top = `${Math.random() * 100}%`;
-        flower.style.left = `${Math.random() * 100}%`;
-        flowerBurst.appendChild(flower);
+        document.querySelector(".nextBtn").style.display = "none";
       }
     }
   </script>
 </body>
 </html>
 
-
-</body>
-</html>
 
 
