@@ -30,14 +30,8 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(0.5);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh) scale(1); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
     }
 
     #intro {
@@ -46,7 +40,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: white; /* O'ZGARTIRILDI: oldingi 'black' */
+      background: black;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,7 +68,7 @@
       100% { transform: scale(1); }
     }
 
-    video#introVideo, video#finalVideo {
+    video#introVideo, video#finalVideo, video#fireworksVideo {
       position: fixed;
       top: 0;
       left: 0;
@@ -128,6 +122,26 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    #fireworks {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #fireworks img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
@@ -135,15 +149,19 @@
   <div id="intro">
     <button id="startBtn">✨ Clique aqui para começar ✨</button>
     <video id="introVideo" playsinline>
-      <source src="https://files.catbox.moe/t5iju6.mp4" type="video/mp4">
+      <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
     </video>
   </div>
 
   <video id="finalVideo" playsinline>
-    <source src="https://files.catbox.moe/ghbwut.mp4" type="video/mp4">
+    <source src="https://files.catbox.moe/t5iju6.mp4" type="video/mp4">
   </video>
 
+  <div id="fireworks">
+    <img src="https://cdn.pixabay.com/animation/2023/01/04/16/05/16-05-14-615_512.gif" alt="Fireworks">
+  </div>
   <audio id="bgMusic" src="https://files.catbox.moe/1a0rmy.mp3" loop></audio>
+  <audio id="fireworksMusic" src="https://files.catbox.moe/wvzzcb.mp3" loop></audio>
 
   <div id="main">
     <div class="page active">
@@ -152,11 +170,11 @@
     </div>
     <div class="page">
       <span class="glow-text">Quero te dizer que você é uma pessoa incrível...</span><br>
-      <img src="https://i.postimg.cc/02HZhWSK/png-transparent-disney-frozen-anna-and-elsa-elsa-kristoff-anna-olaf-anna-disney-princess-cartoon-dol.png" style="max-width: 100%; margin-top: 20px;">
+      <img src="https://i.postimg.cc/c4NXWgk0/Elsa-Frozen-Disney-Princess-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
     </div>
     <div class="page">
       <span class="glow-text">Cada momento com você é mágico e inesquecível...</span><br>
-      <img src="https://i.postimg.cc/0QHTXff9/800px-Moana-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
+      <img src="https://i.postimg.cc/g090tpkS/Vanellope-von-Schweetz-4-29-removebg-preview.png" style="max-width: 100%; margin-top: 20px;">
     </div>
     <div class="page">
       <span class="glow-text">Neste dia especial, eu só quero te fazer sorrir...</span><br>
@@ -179,7 +197,7 @@
   </div>
 
   <script>
-    // Heart Animation
+    // Hearts
     for (let i = 0; i < 30; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
@@ -194,9 +212,12 @@
     const introDiv = document.getElementById("intro");
     const mainContent = document.getElementById("main");
     const bgMusic = document.getElementById("bgMusic");
+    const fireworks = document.getElementById("fireworks");
+    const fireworksMusic = document.getElementById("fireworksMusic");
 
     startBtn.addEventListener("click", () => {
       startBtn.style.display = "none";
+      introDiv.style.background = "white";
       introVideo.style.display = "block";
       introVideo.muted = false;
       introVideo.play();
@@ -211,9 +232,9 @@
       }, 2000);
     });
 
-    // Pages
     const pages = document.querySelectorAll(".page");
     let current = 0;
+
     function nextPage() {
       pages[current].classList.remove("active");
       current++;
@@ -223,10 +244,15 @@
         document.querySelector("#main button").style.display = "none";
         bgMusic.pause();
         finalVideo.style.display = "block";
+        document.body.style.background = "black";
         finalVideo.play();
+        finalVideo.addEventListener("ended", () => {
+          finalVideo.style.display = "none";
+          fireworks.style.display = "flex";
+          fireworksMusic.play();
+        });
       }
     }
   </script>
 </body>
 </html>
-
